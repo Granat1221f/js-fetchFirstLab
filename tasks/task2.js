@@ -8,9 +8,22 @@
 
 
 function createUser(user) {
-  // Ваш код
+  return fetch("https://jsonplaceholder.typicode.com/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    console.error("Error creating user:", error);
+    return null;
+  });
 }
 
-console.log(createUser({name: "Sam", email: "fjsnfkjns2342@gmail.com"}))
+createUser({ name: "Sam", email: "fjsnfkjns2342@gmail.com" })
+  .then(response => console.log(response));
 
 module.exports = createUser;
